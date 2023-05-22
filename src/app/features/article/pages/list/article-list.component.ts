@@ -1,9 +1,18 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  Injector,
+  OnInit,
+  Signal,
+  inject,
+  signal,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { PathRoutes } from 'src/app/core/constants/routes';
 import { replaceParams } from 'src/app/core/utils/route';
 import { ArticleService } from '../article.service';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { Article } from '../models/article';
 
 @Component({
   standalone: true,
@@ -13,14 +22,22 @@ import { ArticleService } from '../article.service';
   imports: [CommonModule],
 })
 export class ArticleListComponent implements OnInit {
-  title = 'my-blog';
+  articles: Signal<Article[]> = signal<Article[]>([]);
+
+  private injector: Injector = inject(Injector);
 
   PathRoutes = PathRoutes;
 
-  constructor(private readonly router: Router, private readonly articleService: ArticleService) {}
+  constructor(
+    private readonly router: Router,
+    private readonly articleService: ArticleService
+  ) {}
 
   ngOnInit(): void {
-    this.articleService.getArticles().subscribe(data => console.log(data));
+    this.articles = toSignal(this.articleService.getArticles(), {
+      initialValue: [],
+      injector: this.injector,
+    });
   }
 
   navigate(route: PathRoutes, articleId: number): void {

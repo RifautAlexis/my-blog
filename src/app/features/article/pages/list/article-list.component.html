@@ -1,2 +1,8 @@
 <h1>Welcom on Article-List</h1>
-<button (click)="navigate(PathRoutes.ArticleDetails, 1)">Go To Details</button>
+
+<ng-container *ngFor="let article of articles()">
+    <li (click)="navigate(PathRoutes.ArticleDetails, article.id)">
+        {{article.title}}
+        {{article.createdAt | date:'yyyy/MM/dd HH:mm'}}
+    </li>
+</ng-container>
