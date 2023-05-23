@@ -10,9 +10,9 @@ import {
 import { Router } from '@angular/router';
 import { PathRoutes } from 'src/app/core/constants/routes';
 import { replaceParams } from 'src/app/core/utils/route';
-import { ArticleService } from '../article.service';
+import { ArticleService } from '../../../../shared/services/article.service';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { Article } from '../models/article';
+import { Article } from '../../../../shared/models/article';
 
 @Component({
   standalone: true,

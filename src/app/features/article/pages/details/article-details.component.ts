@@ -7,8 +7,8 @@ import {
   signal,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ArticleService } from '../article.service';
-import { Article } from '../models/article';
+import { ArticleService } from '../../../../shared/services/article.service';
+import { Article } from '../../../../shared/models/article';
 import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
