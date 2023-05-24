@@ -6,7 +6,7 @@ import {
   inject,
   signal,
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ArticleService } from '../../../../shared/services/article.service';
 import { Article } from '../../../../shared/models/article';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -18,24 +18,24 @@ import { toSignal } from '@angular/core/rxjs-interop';
   styleUrls: ['./article-details.component.scss'],
 })
 export class ArticleDetailsComponent implements OnInit {
-  articleId!: string;
+  articleId!: number;
   article: Signal<Article> = signal<Article>({} as Article);
 
   private injector: Injector = inject(Injector);
 
   constructor(
     private readonly route: ActivatedRoute,
+    private readonly router: Router,
     private readonly articleService: ArticleService
-  ) {}
+  ) {
+    const navigation = this.router.getCurrentNavigation();
+    const state = navigation!.extras.state as { id: number };
+    this.articleId = state.id;
+  }
 
   ngOnInit(): void {
-    this.articleId = this.route.snapshot.paramMap.get('id')!;
-    console.log(Number(this.articleId), this.articleId);
-    this.articleService.getArticleById(Number(this.articleId)).subscribe(data => {
-        console.log(data);
-    });
     this.article = toSignal(
-      this.articleService.getArticleById(Number(this.articleId)),
+      this.articleService.getArticleById(this.articleId),
       {
         initialValue: {} as Article,
         injector: this.injector,
