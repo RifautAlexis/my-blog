@@ -1,1 +1,5 @@
-@import '@angular/material/prebuilt-themes/purple-green.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "@angular/material/prebuilt-themes/purple-green.css";
