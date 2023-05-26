@@ -1,3 +1,5 @@
+import { PathRoutes, routesDetails } from "../constants/routes";
+
 export function replaceParams(routeUrl: string, replacementValues: string[]): string {
     const routeParamPattern = /:[^/|$|\n]+/gm;
     const counter = routeUrl.match(routeParamPattern)?.length;
@@ -14,4 +16,8 @@ export function replaceParams(routeUrl: string, replacementValues: string[]): st
         if (cnt === replacementValues.length) cnt = 0;
         return replacementValues[cnt++];
     });
+}
+
+export function getRouteUrl(route: PathRoutes): string {
+    return routesDetails[route].url;
 }

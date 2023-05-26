@@ -4,4 +4,5 @@ export interface Article {
     content: string;
     author: string;
     createdAt: Date;
+    tags: string[];
 }
