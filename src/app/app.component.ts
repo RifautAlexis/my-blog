@@ -9,5 +9,4 @@ import { HeaderComponent } from './core/components/header.component';
   styleUrls: ['./app.component.scss'],
   imports: [RouterModule, HeaderComponent],
 })
-export class AppComponent {
-}
+export class AppComponent {}

@@ -1,8 +1,8 @@
 <h1>Welcom on Article-List</h1>
 
 <ng-container *ngFor="let article of articles()">
-    <li (click)="navigate(PathRoutes.ArticleDetails, article.id, article.title)">
-        {{article.title}}
-        {{article.createdAt | date:'yyyy/MM/dd HH:mm'}}
-    </li>
+  <li (click)="navigate(PathRoutes.ArticleDetails, article.id, article.title)">
+    {{ article.title }}
+    {{ article.createdAt | date : "yyyy/MM/dd HH:mm" }}
+  </li>
 </ng-container>

@@ -1,4 +1,4 @@
 {
-    "api/articles": "/articles",
-    "api/articles/:id": "/articles/:id"
+  "api/articles": "/articles",
+  "api/articles/:id": "/articles/:id"
 }

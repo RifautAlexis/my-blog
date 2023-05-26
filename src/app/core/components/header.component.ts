@@ -4,7 +4,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { PathRoutes } from '../constants/routes';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { getRouteUrl } from '../utils/route';
 
 @Component({

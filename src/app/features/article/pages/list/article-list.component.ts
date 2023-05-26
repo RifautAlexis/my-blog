@@ -41,7 +41,9 @@ export class ArticleListComponent implements OnInit {
   }
 
   navigate(route: PathRoutes, articleId: number, articleTitle: string): void {
-    const urlFormatted = replaceParams(getRouteUrl(route), [articleTitle.replaceAll(' ', '-')]);
-    this.router.navigate([urlFormatted], {state: {id: articleId}});
+    const urlFormatted = replaceParams(getRouteUrl(route), [
+      articleTitle.replaceAll(' ', '-'),
+    ]);
+    this.router.navigate([urlFormatted], { state: { id: articleId } });
   }
 }

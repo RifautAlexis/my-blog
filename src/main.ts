@@ -12,7 +12,7 @@ bootstrapApplication(AppComponent, {
     provideAnimations(),
     provideHttpClient(),
     importProvidersFrom(
-      RouterModule.forRoot(routes),
+      RouterModule.forRoot(routes)
       // HttpClientModule,
     ),
   ],
