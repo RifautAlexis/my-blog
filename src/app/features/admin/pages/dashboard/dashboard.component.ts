@@ -3,6 +3,8 @@ import {
   Injector,
   OnInit,
   Signal,
+  WritableSignal,
+  effect,
   inject,
   signal,
 } from '@angular/core';
@@ -12,6 +14,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { DashboardTableComponent } from '../../components/dashboard-table/dashboard-table.component';
 import { DashboardFilterComponent } from '../../components/dashboard-filter/dashboard-filter.component';
+import { AdminService } from '../../services/admin.service';
 
 @Component({
   selector: 'dashboard',
@@ -21,16 +24,37 @@ import { DashboardFilterComponent } from '../../components/dashboard-filter/dash
   imports: [CommonModule, DashboardTableComponent, DashboardFilterComponent],
 })
 export class DashboardComponent implements OnInit {
-  articles: Signal<Article[]> = signal<Article[]>([]);
+  articles: WritableSignal<Article[]> = signal<Article[]>([]);
+  
+  private adminService = inject(AdminService);
 
-  private injector: Injector = inject(Injector);
-
-  constructor(private readonly articleService: ArticleService) {}
+  constructor() {
+    effect(() => {
+      console.log(this.adminService.articles());
+    })
+  }
 
   ngOnInit() {
-    this.articles = toSignal(this.articleService.getArticles(), {
-      initialValue: [],
-      injector: this.injector,
-    });
+    this.adminService.init();
+    this.articles = this.adminService.articles;
+  }
+
+  onSearchedTerm(searchedTerm: string | null): void {
+    if (!!!searchedTerm || searchedTerm === ' ') {
+      this.adminService.resetSearch();
+      return;
+    }
+    
+    this.articles.set(
+      this.articles().filter(
+        (article) =>
+          article.title.toLowerCase().includes(searchedTerm?.toLowerCase()) ||
+          article.author.toLowerCase().includes(searchedTerm?.toLowerCase()) ||
+          article.createdAt.toString().includes(searchedTerm?.toLowerCase()) ||
+          article.tags.some((tag) =>
+            tag.toLowerCase().includes(searchedTerm?.toLowerCase())
+          )
+      )
+    );
   }
 }
