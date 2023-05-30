@@ -28,12 +28,6 @@ export class DashboardComponent implements OnInit {
   
   private adminService = inject(AdminService);
 
-  constructor() {
-    effect(() => {
-      console.log(this.adminService.articles());
-    })
-  }
-
   ngOnInit() {
     this.adminService.init();
     this.articles = this.adminService.articles;
