@@ -1,4 +1,4 @@
-import { bootstrapApplication } from '@angular/platform-browser';
+import { bootstrapApplication, provideClientHydration } from '@angular/platform-browser';
 import { AppComponent } from './app/app.component';
 import { importProvidersFrom } from '@angular/core';
 import { RouterModule, TitleStrategy } from '@angular/router';
@@ -11,9 +11,9 @@ bootstrapApplication(AppComponent, {
   providers: [
     provideAnimations(),
     provideHttpClient(),
+    provideClientHydration(),
     importProvidersFrom(
       RouterModule.forRoot(routes)
-      // HttpClientModule,
     ),
   ],
 }).catch((err) => console.error(err));
