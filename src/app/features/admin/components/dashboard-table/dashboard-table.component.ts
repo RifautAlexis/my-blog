@@ -19,7 +19,7 @@ export class DashboardTableComponent implements AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   _data: Article[] = [];
-  @Input()
+  @Input({ required: true })
   get data(): Article[] {
     return this._data;
   }
