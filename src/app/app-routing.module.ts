@@ -26,4 +26,12 @@ export const routes: Routes = [
         (m) => m.DashboardComponent
       ),
   },
+  {
+    path: routesDetails[PathRoutes.ArticleEdition].url,
+    title: routesDetails[PathRoutes.ArticleEdition].title,
+    loadComponent: () =>
+      import('./features/admin/pages/article-edition/article-edition.component').then(
+        (m) => m.ArticleEditionComponent
+      ),
+  },
 ];
