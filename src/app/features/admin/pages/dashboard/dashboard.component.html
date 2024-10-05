@@ -1,8 +1,0 @@
-<div>
-  <button mat-raised-button>Basic</button>
-</div>
-
-<dashboard-filter (searchedTerm)="onSearchedTerm($event)"></dashboard-filter>
-
-<dashboard-table [data]="articles()" (showDetails)="navigate($event)" (editClicked)="navigate($event)" (deleteClicked)="onDeleteItem($event)">
-</dashboard-table>
