@@ -1,7 +1,13 @@
-<main>
-  <h1 class="text-3xl font-bold underline">
-    Hello Wolrd !
-  </h1>
-</main>
-
-<router-outlet />
+<nz-layout>
+  <nz-header>
+    <button nz-button nzType="primary" (click)="toggleTheme()">
+      Change Theme
+    </button>
+  </nz-header>
+  <nz-content>
+    <main>
+      <h1 class="text-3xl font-bold underline">Hello Wolrd !</h1>
+    </main>
+    <router-outlet />
+  </nz-content>
+</nz-layout>
